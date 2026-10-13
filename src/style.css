@@ -329,3 +329,75 @@ header.showroom-header{display:flex;gap:25px;align-items:center;justify-content:
   .reference-home .ref-category-section .ref-category{height:160px}
   .reference-home .ref-brands-section .ref-brands-row{gap:20px}
 }
+
+
+/* Storefront v2: consistent wide container and media dimensions */
+.reference-home{
+ --store-max:1520px;
+ --store-gutter:clamp(24px,3.3vw,64px);
+ --store-section:80px;
+ --store-section-compact:64px;
+ --store-gap:24px;
+}
+.reference-home .ref-category-section,
+.reference-home .ref-brands-section{
+ padding:var(--store-section) var(--store-gutter);
+}
+.reference-home .ref-category-section>.ref-section-heading,
+.reference-home .ref-category-section>.ref-category-grid,
+.reference-home .ref-brands-section>.ref-brands-row{max-width:var(--store-max)}
+.reference-home .ref-category-section .ref-category{height:240px}
+.reference-home .ref-category-section .ref-category img{object-fit:cover;object-position:center}
+.reference-home .ref-category-section .ref-category-copy{padding:28px 0 20px 24px}
+.reference-home .ref-brands-section .ref-brand{min-height:125px}
+.reference-home .ref-brands-section .ref-brand-banner{min-height:220px}
+.reference-home .theme-product-section,
+.reference-home .theme-category-showcase,
+.reference-home .theme-trust-section,
+.reference-home .theme-promos,
+.reference-home .ref-featured{
+ max-width:calc(var(--store-max) + 2 * var(--store-gutter));
+ padding-left:var(--store-gutter);
+ padding-right:var(--store-gutter);
+}
+.reference-home .theme-style-card img{height:280px;object-fit:cover}
+.reference-home .theme-product-section .product-card img,
+.reference-home .ref-featured .product-card img{height:280px;object-fit:contain}
+.reference-home .theme-promos .theme-promo-card{min-height:320px}
+.reference-home .theme-adventure{min-height:500px}
+.reference-home .theme-adventure-content{max-width:calc(var(--store-max) + 2 * var(--store-gutter))}
+.reference-home .ref-about{max-width:calc(var(--store-max) + 2 * var(--store-gutter));grid-template-columns:32% minmax(0,1fr) 20%;gap:32px}
+.reference-home .ref-store-image{height:360px}
+.reference-home .ref-about-content{padding:48px 0}
+.reference-home .ref-contact{padding:80px max(var(--store-gutter),calc((100vw - var(--store-max))/2));gap:48px}
+.reference-home .ref-map-placeholder{min-height:250px}
+.reference-home .ref-section-heading h2{font-size:clamp(1.75rem,2.2vw,2.25rem)}
+.reference-home .ref-category-section>.ref-section-heading,
+.reference-home .ref-brands-section .ref-section-heading{margin-bottom:32px}
+@media(max-width:1100px){
+ .reference-home{--store-section:56px;--store-section-compact:48px;--store-gutter:24px;--store-gap:16px}
+ .reference-home .ref-category-section .ref-category{height:190px}
+ .reference-home .ref-store-image{height:280px}
+ .reference-home .ref-about{gap:18px}
+ .reference-home .theme-style-card img{height:220px}
+ .reference-home .theme-product-section .product-card img,
+ .reference-home .ref-featured .product-card img{height:230px}
+ .reference-home .ref-contact{padding:56px 24px}
+}
+@media(max-width:650px){
+ .reference-home{--store-section:40px;--store-section-compact:32px;--store-gutter:16px;--store-gap:16px}
+ .reference-home .ref-category-section,.reference-home .ref-brands-section{padding:40px 16px}
+ .reference-home .ref-category-section .ref-category{height:160px}
+ .reference-home .ref-category-section .ref-category-copy{padding:14px 6px 10px 12px}
+ .reference-home .ref-brands-section .ref-brand{min-height:90px}
+ .reference-home .ref-brands-section .ref-brand-banner{min-height:180px}
+ .reference-home .theme-style-card img{height:200px}
+ .reference-home .theme-product-section .product-card img,
+ .reference-home .ref-featured .product-card img{height:200px}
+ .reference-home .theme-promos .theme-promo-card{min-height:210px}
+ .reference-home .theme-adventure{min-height:350px}
+ .reference-home .ref-store-image{height:250px}
+ .reference-home .ref-about-content{padding:24px 20px}
+ .reference-home .ref-contact{padding:40px 16px}
+ .reference-home .ref-map-placeholder{min-height:180px}
+}
