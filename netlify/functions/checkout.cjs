@@ -1,0 +1,16 @@
+const{headers,reply,adminClient,sendEmail,esc}=require('./_shared.cjs');
+exports.handler=async event=>{if(event.httpMethod==='OPTIONS')return{statusCode:204,headers};if(event.httpMethod!=='POST')return reply(405,{error:'Method not allowed'});
+try{let b=JSON.parse(event.body||'{}'),a=b.address||{};if(!Array.isArray(b.items)||!b.items.length||b.items.length>40)return reply(400,{error:'Invalid cart'});
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(b.email||'')||!/^[6-9]\d{9}$/.test(b.phone||'')||!b.name?.trim()||!a.line1?.trim()||!a.city?.trim()||!a.state?.trim()||!/^[1-9]\d{5}$/.test(a.pin||''))return reply(400,{error:'Please enter valid delivery details'});
+if(b.payment_method!=='COD')return reply(400,{error:'Online payment is not configured. Please use COD.'});
+const db=adminClient();let customerId=null;if(event.headers.authorization?.startsWith('Bearer ')){let token=event.headers.authorization.slice(7),{data}=await db.auth.getUser(token);customerId=data?.user?.id||null;}
+const ids=[...new Set(b.items.map(i=>i.id))];const{data:products,error:pe}=await db.from('products').select('id,name,sku,price,stock,active').in('id',ids);if(pe)throw pe;if(products.length!==ids.length)return reply(400,{error:'A product is unavailable'});
+let lines=[],subtotal=0;for(const item of b.items){let p=products.find(p=>p.id===item.id),q=Number(item.quantity);if(!p?.active||!Number.isInteger(q)||q<1||q>20||q>p.stock)return reply(409,{error:`Insufficient stock or invalid quantity: ${p?.name||'product'}`});let price=Number(p.price);lines.push({product_id:p.id,name:p.name,sku:p.sku,price,quantity:q,line_total:price*q});subtotal+=price*q;}
+// Demo shipping rule: free shipping >= Rs 10,000, otherwise Rs 299. Confirm before going live.
+const shipping=subtotal>=10000?0:299,total=subtotal+shipping;const order_number='DCC-'+Date.now().toString(36).toUpperCase()+'-'+require('crypto').randomBytes(3).toString('hex').toUpperCase();
+// Atomic stock decrement and order insertion are implemented in the database RPC.
+const{data:result,error}=await db.rpc('place_cod_order',{p_order_number:order_number,p_customer_id:customerId,p_name:b.name.trim(),p_email:b.email.trim(),p_phone:b.phone,p_address:a,p_notes:(b.notes||'').slice(0,500),p_lines:lines,p_shipping:shipping});if(error){console.error(error);return reply(409,{error:'Order could not be placed. Please check stock and retry.'})}
+const summary=`<h2>Order ${esc(order_number)}</h2><p>Customer: ${esc(b.name)}</p><p>Phone: ${esc(b.phone)}</p><p>Delivery: ${esc(a.line1)}, ${esc(a.city)}, ${esc(a.state)} - ${esc(a.pin)}</p><ul>${lines.map(l=>`<li>${esc(l.name)} × ${l.quantity}: ₹${l.line_total}</li>`).join('')}</ul><p>Subtotal: ₹${subtotal} | Shipping: ₹${shipping}</p><h3>Total: ₹${total}</h3><p>Payment: Cash on Delivery. Status: Placed.</p>`;
+const mailResults=await Promise.allSettled([sendEmail(b.email,`Order confirmed: ${order_number}`,summary),...(process.env.OWNER_EMAIL?[sendEmail(process.env.OWNER_EMAIL,`New store order: ${order_number}`,summary)]:[])]);
+return reply(200,{order_number,order_id:result,total,shipping,mail_status:mailResults.map(x=>x.status==='fulfilled'?x.value:{sent:false})});
+}catch(e){console.error(e);return reply(500,{error:'Checkout temporarily unavailable'})}};
