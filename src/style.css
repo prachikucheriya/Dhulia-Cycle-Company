@@ -275,3 +275,17 @@ header.showroom-header{display:flex;gap:25px;align-items:center;justify-content:
 .reference-home .ref-about{max-width:calc(var(--store-max) + 2 * var(--store-gutter));margin:0 auto}
 @media(max-width:900px){.reference-home{--store-section:56px;--store-section-compact:40px;--store-gap:16px}.reference-home .theme-product-section .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.reference-home .theme-style-card img{height:165px}}
 @media(max-width:600px){.reference-home{--store-section:40px;--store-section-compact:32px;--store-gap:16px}.reference-home .theme-section-title{margin-bottom:24px}.reference-home .theme-style-grid,.reference-home .theme-trust-grid{grid-template-columns:1fr}.reference-home .theme-style-card img{height:200px}.reference-home .theme-promos{grid-template-columns:1fr}.reference-home .theme-adventure{min-height:330px}.reference-home .theme-adventure-content{padding:48px var(--store-gutter)}.reference-home .theme-promo-card{min-height:180px}.reference-home .theme-trust-grid article{padding:22px}}
+
+
+/* Larger editorial hero inspired by leading bicycle storefront layouts */
+.reference-home .ref-hero{height:auto;min-height:clamp(620px,76vh,760px);background:linear-gradient(90deg,rgba(2,34,79,.98) 0%,rgba(5,69,149,.94) 32%,rgba(8,83,172,.50) 58%,rgba(5,34,74,.05) 85%),url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=2000') center 52%/cover no-repeat;display:flex;align-items:center;overflow:hidden}
+.reference-home .ref-hero-text{padding:100px clamp(24px,6vw,100px);max-width:790px}
+.reference-home .ref-eyebrow{color:#c6e2ff;font-size:.87rem;letter-spacing:.2em}
+.reference-home .ref-hero h1{font-size:clamp(3.5rem,5.2vw,5.4rem);line-height:1.04;color:#fff;max-width:780px;margin:20px 0}
+.reference-home .ref-hero h1 span{color:#a9d6ff}
+.reference-home .ref-hero p{color:#e7f1ff;font-size:clamp(1rem,1.3vw,1.18rem);line-height:1.65;max-width:510px;margin:16px 0 28px}
+.reference-home .ref-hero-actions{gap:16px;flex-wrap:wrap}
+.reference-home .ref-hero-actions .ref-button{min-height:52px;padding:14px 28px;border-radius:7px}
+.reference-home .ref-hero-perks{right:clamp(20px,4vw,80px);gap:20px}
+@media(max-width:900px){.reference-home .ref-hero{min-height:580px;background-position:60% center}.reference-home .ref-hero-text{padding:75px 28px;max-width:620px}.reference-home .ref-hero h1{font-size:clamp(3rem,6.2vw,4.5rem)}.reference-home .ref-hero-perks{display:none}}
+@media(max-width:600px){.reference-home .ref-hero{min-height:530px;background:linear-gradient(90deg,rgba(2,34,79,.96),rgba(5,69,149,.78) 72%,rgba(5,34,74,.36)),url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200') 58% center/cover no-repeat}.reference-home .ref-hero-text{padding:65px 22px}.reference-home .ref-hero h1{font-size:clamp(2.65rem,10vw,3.7rem)}.reference-home .ref-hero p{font-size:1rem}.reference-home .ref-hero-actions .ref-button{min-height:46px;padding:12px 18px}}
