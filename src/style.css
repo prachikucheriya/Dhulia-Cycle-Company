@@ -204,3 +204,36 @@ header.showroom-header{display:flex;gap:25px;align-items:center;justify-content:
 .ref-featured{padding:22px 5vw;background:#fff}
 @media(max-width:1100px){.ref-hero-perks{display:none}.ref-category-grid{grid-template-columns:repeat(2,1fr)}.ref-brands-row{grid-template-columns:1fr}.ref-about{grid-template-columns:32% 1fr}.ref-stats{grid-column:1/-1;margin:0 20px 20px}}
 @media(max-width:650px){.ref-hero{height:460px;background-position:63% center;align-items:flex-start}.ref-hero-text{padding:40px 20px;max-width:100%;background:linear-gradient(90deg,#eef7fff0,#eef7ff90,transparent)}.ref-hero h1{font-size:2.6rem}.ref-hero p{max-width:310px}.ref-main{padding:18px 15px}.ref-category-grid{gap:10px}.ref-category{height:155px}.ref-category-copy{padding:13px 5px 10px 12px;width:65%}.ref-category h3{font-size:.95rem}.ref-category img{width:55%}.ref-brand-grid{grid-template-columns:repeat(2,1fr)}.ref-about{display:block}.ref-store-image{height:230px}.ref-about-content{padding:20px}.ref-about-features{grid-template-columns:repeat(2,1fr)}.ref-stats{margin:0 20px 20px}.ref-contact{grid-template-columns:1fr;padding:24px 20px}.ref-contact-details{grid-template-columns:1fr}.ref-featured{padding:20px 15px}}
+
+
+/* About and footer match the approved reference; standard 80px section spacing */
+.reference-home .ref-main{padding-top:48px;padding-bottom:48px}
+.reference-home .ref-brands-row{margin-top:30px}
+.reference-home .ref-about{max-width:none;margin:0 auto;min-height:280px;grid-template-columns:35% minmax(0,1fr) 19%;gap:24px;border-top:1px solid #e7eef8;border-bottom:1px solid #e7eef8}
+.reference-home .ref-store-image{height:280px}
+.reference-home .ref-about-content{padding:35px 0}
+.reference-home .ref-about-content h2{font-size:1.85rem;margin-bottom:10px}
+.reference-home .ref-about-content p{font-size:.88rem;line-height:1.55}
+.reference-home .ref-about-features{margin-top:23px;gap:8px}
+.reference-home .ref-about-features span{display:flex;align-items:center;gap:7px;font-size:.73rem}
+.reference-home .ref-about-features svg{width:24px;height:24px;flex-shrink:0;color:#0865d8}
+.reference-home .ref-stats{margin-right:20px;background:#eaf4ff;grid-template-columns:1fr 1fr;padding:22px;gap:15px}
+.reference-home .ref-stats div{padding:9px 0}
+.reference-home .ref-stats b{font-size:1.9rem}
+.reference-home .ref-featured{padding-top:80px;padding-bottom:80px}
+.reference-home .ref-contact{padding-top:45px;padding-bottom:45px;background:linear-gradient(115deg,#052a64,#0956b1);color:white}
+.reference-home .ref-contact .ref-mini-label{color:#d5e8ff}
+.reference-home .ref-contact p{color:#d8e9ff}
+.reference-home .ref-contact-details span{color:#d6e7ff}
+.reference-home .ref-contact .ref-button{background:white;color:#084f9f!important}
+.ref-footer{background:#061e44;color:#fff;padding:25px max(5vw,25px) 12px!important;display:block!important}
+.ref-footer-main{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:18px}
+.ref-footer-brand b{font-size:1rem}.ref-footer-brand p{font-size:.78rem;color:#d4e7ff;margin:5px 0}
+.ref-footer-main nav{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.ref-footer-main nav a{color:#fff;font-size:.86rem}
+.ref-footer-social{display:flex;gap:12px;justify-content:flex-end}
+.ref-footer-social span{display:grid;place-items:center;width:34px;height:34px;background:#174476;border-radius:50%;font-weight:800;color:#fff}
+.ref-footer-bottom{font-size:.72rem;color:#a6c0e0;text-align:center;margin-top:18px;padding-top:12px;border-top:1px solid #ffffff16}
+.ref-footer-bottom span{margin-left:12px}
+@media(max-width:1000px){.reference-home .ref-about{grid-template-columns:32% 1fr}.reference-home .ref-about-content{padding:20px 15px 20px 0}.reference-home .ref-stats{grid-column:1/-1;margin:0 20px 20px}}
+@media(max-width:650px){.reference-home .ref-main{padding-top:35px;padding-bottom:35px}.reference-home .ref-about{display:block}.reference-home .ref-store-image{height:230px}.reference-home .ref-about-content{padding:24px 20px}.reference-home .ref-about-features{grid-template-columns:repeat(2,1fr)}.reference-home .ref-featured{padding-top:50px;padding-bottom:50px}.reference-home .ref-contact{padding-top:35px;padding-bottom:35px}.ref-footer-main{grid-template-columns:1fr;text-align:center}.ref-footer-main nav{gap:18px}.ref-footer-social{justify-content:center}.ref-footer-bottom span{display:block;margin:7px 0}}
