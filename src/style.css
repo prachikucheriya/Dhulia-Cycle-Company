@@ -289,3 +289,43 @@ header.showroom-header{display:flex;gap:25px;align-items:center;justify-content:
 .reference-home .ref-hero-perks{right:clamp(20px,4vw,80px);gap:20px}
 @media(max-width:900px){.reference-home .ref-hero{min-height:580px;background-position:60% center}.reference-home .ref-hero-text{padding:75px 28px;max-width:620px}.reference-home .ref-hero h1{font-size:clamp(3rem,6.2vw,4.5rem)}.reference-home .ref-hero-perks{display:none}}
 @media(max-width:600px){.reference-home .ref-hero{min-height:530px;background:linear-gradient(90deg,rgba(2,34,79,.96),rgba(5,69,149,.78) 72%,rgba(5,34,74,.36)),url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=1200') 58% center/cover no-repeat}.reference-home .ref-hero-text{padding:65px 22px}.reference-home .ref-hero h1{font-size:clamp(2.65rem,10vw,3.7rem)}.reference-home .ref-hero p{font-size:1rem}.reference-home .ref-hero-actions .ref-button{min-height:46px;padding:12px 18px}}
+
+
+/* Separate full-width category and brand sections with systematic spacing */
+.reference-home .ref-category-section,
+.reference-home .ref-brands-section{
+  box-sizing:border-box;
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:80px max(24px,calc((100vw - 1440px)/2));
+}
+.reference-home .ref-category-section{background:#f8fbff}
+.reference-home .ref-brands-section{background:#fff;border-top:1px solid #e7edf6}
+.reference-home .ref-category-section>.ref-section-heading,
+.reference-home .ref-category-section>.ref-category-grid,
+.reference-home .ref-brands-section>.ref-brands-row{
+  max-width:1440px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.reference-home .ref-category-section>.ref-section-heading,
+.reference-home .ref-brands-section .ref-section-heading{margin-bottom:32px}
+.reference-home .ref-category-section .ref-category-grid{gap:24px}
+.reference-home .ref-category-section .ref-category{height:220px;border-radius:12px}
+.reference-home .ref-brands-section .ref-brands-row{margin-top:0;gap:32px;align-items:stretch}
+.reference-home .ref-brands-section .ref-brand-grid{gap:20px}
+.reference-home .ref-brands-section .ref-brand{min-height:105px}
+.reference-home .ref-brands-section .ref-brand-banner{min-height:190px;border-radius:12px}
+@media(max-width:900px){
+  .reference-home .ref-category-section,.reference-home .ref-brands-section{padding:56px 24px}
+  .reference-home .ref-category-section .ref-category-grid{gap:16px}
+  .reference-home .ref-category-section .ref-category{height:180px}
+}
+@media(max-width:600px){
+  .reference-home .ref-category-section,.reference-home .ref-brands-section{padding:40px 16px}
+  .reference-home .ref-category-section>.ref-section-heading,
+  .reference-home .ref-brands-section .ref-section-heading{margin-bottom:24px}
+  .reference-home .ref-category-section .ref-category{height:160px}
+  .reference-home .ref-brands-section .ref-brands-row{gap:20px}
+}
