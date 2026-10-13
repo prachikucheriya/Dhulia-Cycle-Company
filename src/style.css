@@ -119,3 +119,31 @@
 .showroom-contact-map small{color:#4f7093}
 @media(max-width:1000px){.showroom-hero{grid-template-columns:1fr 1fr}.showroom-hero-copy{padding:50px 4vw}.showroom-categories{grid-template-columns:repeat(2,1fr)}.showroom-brand-area{grid-template-columns:1fr}.showroom-about{grid-template-columns:35% 1fr}.showroom-about-stats{grid-column:1/-1;margin:0 20px 20px;grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.showroom-hero{display:flex;flex-direction:column}.showroom-hero-copy{padding:45px 20px}.showroom-hero h1{font-size:2.7rem}.showroom-hero-art{height:220px}.showroom-hero-art img{min-height:220px}.showroom-hero-art:before{background:linear-gradient(#0b55b6,transparent 40%)}.showroom-benefits{gap:10px}.showroom-benefits span{font-size:.72rem}.showroom-section{padding:24px 16px}.showroom-heading h2{font-size:1.5rem}.showroom-categories{gap:9px}.showroom-category{min-height:160px}.showroom-category>div{padding:14px 7px;width:68%}.showroom-category h3{font-size:.9rem}.showroom-category img{width:53%;opacity:.8}.showroom-category b{font-size:.7rem;padding:7px}.showroom-brand-tiles{grid-template-columns:repeat(2,1fr)}.showroom-about{display:block}.showroom-about-photo{height:220px}.showroom-about-copy{padding:22px}.showroom-about-stats{margin:0 16px 20px}.showroom-featured .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.showroom-contact{grid-template-columns:1fr}}
+
+
+/* Match approved homepage screenshot: compact top strip, white nav, blue storefront */
+.showroom-topbar{min-height:29px;background:#083a7e;color:#eaf4ff;display:flex;justify-content:space-between;align-items:center;padding:5px max(4vw,22px);font-size:11px;gap:20px}
+.showroom-topbar span{display:inline-flex;align-items:center;gap:6px}
+header.showroom-header{display:flex;gap:25px;align-items:center;justify-content:space-between;min-height:75px;padding:9px max(4vw,22px);background:white;box-shadow:0 2px 10px #002c5810}
+.showroom-header .showroom-logo{display:flex;align-items:center;gap:9px;white-space:nowrap}
+.showroom-cycle{font-size:2.4rem;line-height:1}
+.showroom-header nav{display:flex;align-items:center;gap:30px}
+.showroom-header nav a{font-weight:700;font-size:.92rem}
+.showroom-header-search{display:flex;align-items:stretch;max-width:300px;width:23%;height:38px;border:1px solid #e2e8f1;border-radius:7px;overflow:hidden}
+.showroom-header-search input{min-width:0;width:100%;border:0;padding:0 12px;font-size:.78rem;outline:0}
+.showroom-header-search button{background:#075fd2;color:#fff;border:0;width:44px;display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+.showroom-header .header-actions{display:flex;gap:17px;align-items:center}
+.showroom-home .showroom-hero{min-height:335px;grid-template-columns:53% 47%;background:linear-gradient(100deg,#052e73 0%,#075ab8 61%,#1887e0 100%)}
+.showroom-home .showroom-hero-copy{padding:42px 2vw 26px max(4vw,24px)}
+.showroom-home .showroom-hero h1{font-size:clamp(2.8rem,4.4vw,4.5rem);margin:11px 0 12px}
+.showroom-home .showroom-hero p{font-size:.94rem;max-width:560px}
+.showroom-home .showroom-benefits{margin-top:23px}
+.showroom-home .showroom-hero-art img{min-height:335px;object-position:center}
+.showroom-home .showroom-section{padding-top:18px;padding-bottom:17px}
+.showroom-home .showroom-categories{gap:13px}
+.showroom-home .showroom-category{min-height:130px}
+.showroom-home .showroom-about{margin-top:0}
+.showroom-home .showroom-about-photo{height:240px}
+.showroom-home .showroom-contact{padding-top:24px;padding-bottom:24px}
+@media(max-width:950px){.showroom-header-search{display:none}.showroom-header nav{gap:15px}.showroom-topbar span:nth-child(2){display:none}}
+@media(max-width:650px){header.showroom-header{flex-wrap:wrap;min-height:auto;gap:8px;padding:12px 15px}.showroom-header nav{order:3;width:100%;justify-content:space-around;gap:10px}.showroom-header .header-actions{margin-left:auto}.showroom-home .showroom-hero{display:flex;flex-direction:column}.showroom-home .showroom-hero-copy{padding:35px 20px 25px}.showroom-home .showroom-hero h1{font-size:2.55rem}.showroom-home .showroom-hero-art img{min-height:200px;height:220px}}
