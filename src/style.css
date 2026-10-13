@@ -422,3 +422,14 @@ header.showroom-header{display:flex;gap:25px;align-items:center;justify-content:
 .reference-home .ref-contact-details span{overflow-wrap:anywhere}
 @media(max-width:1100px){.reference-home .ref-stats{grid-column:1/-1;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:auto;margin:0 20px 20px}}
 @media(max-width:650px){.reference-home .ref-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:0 16px 20px}.reference-home .ref-map-embed,.reference-home .ref-map-embed iframe{min-height:240px;height:240px}}
+
+
+/* Exact reference-style About statistics panel */
+.reference-home .ref-stats{background:#eaf4fd!important;border-radius:12px!important;padding:18px 14px!important;gap:0!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(0,1fr))!important;align-self:center;min-height:225px}
+.reference-home .ref-stats>div{background:transparent!important;border:0!important;border-radius:0!important;padding:12px 14px!important;min-height:92px!important;display:flex;align-items:flex-start;justify-content:center}
+.reference-home .ref-stats>div:nth-child(odd){border-right:1px solid #bddbf5!important}
+.reference-home .ref-stats>div:nth-child(-n+2){border-bottom:1px solid #bddbf5!important}
+.reference-home .ref-stats>div b{font-size:clamp(1.55rem,2vw,2rem)!important;font-weight:800!important;color:#005bd4!important;letter-spacing:-.045em;line-height:1.15}
+.reference-home .ref-stats>div span{font-size:.8rem!important;line-height:1.45!important;color:#101c2d!important;margin-top:5px}
+@media(max-width:1100px){.reference-home .ref-stats{grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(0,1fr))!important;max-width:440px;width:100%;margin:0 auto 24px}}
+@media(max-width:650px){.reference-home .ref-stats{max-width:none;width:auto;margin:0 16px 20px}}
