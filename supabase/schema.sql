@@ -39,7 +39,9 @@ v_qty:=(v_line->>'quantity')::int;
 if v_product.id is null or not v_product.active or v_qty<1 or v_qty>20 or v_product.stock<v_qty then raise exception 'Stock unavailable';end if;
 v_subtotal:=v_subtotal+v_product.price*v_qty;
 end loop;
-if p_shipping<>case when v_subtotal>=10000 then 0 else 299 end then raise exception 'Shipping mismatch';end if;
+if p_shipping <> (case when v_subtotal >= 10000 then 0 else 299 end) then
+  raise exception 'Shipping mismatch';
+end if;
 v_total:=v_subtotal+p_shipping;
 insert into public.orders(order_number,customer_id,customer_name,email,phone,address,notes,subtotal,shipping,total) values(p_order_number,p_customer_id,p_name,p_email,p_phone,p_address,p_notes,v_subtotal,p_shipping,v_total) returning id into v_order;
 for v_line in select value from jsonb_array_elements(p_lines) loop
