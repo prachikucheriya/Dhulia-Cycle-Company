@@ -16,7 +16,7 @@ exports.handler=async event=>{
   if(!key?.startsWith('rzp_test_')||!secret)return reply(503,{error:'Test Razorpay keys not configured'});
   const auth='Basic '+Buffer.from(key+':'+secret).toString('base64');
   const response=await fetch('https://api.razorpay.com/v1/payments/'+encodeURIComponent(payment_id),{headers:{Authorization:auth}});
-  if(!response.ok)return reply(502,{error:'Razorpay lookup failed ('+response.status+')'});
+  if(!response.ok){let details={};try{details=await response.json()}catch{}const code=String(details?.error?.code||'UNKNOWN');const description=String(details?.error?.description||'Razorpay rejected the lookup').slice(0,240);console.error('Razorpay lookup rejected',{status:response.status,code,description});return reply(502,{error:'Razorpay lookup failed',razorpay_http_status:response.status,razorpay_error_code:code,razorpay_message:description});}
   const payment=await response.json();
   const {data:intent}=await db.from('razorpay_payment_intents').select('razorpay_order_id,finalized_order_id,amount_paise').eq('razorpay_order_id',payment.order_id||'').maybeSingle();
   return reply(200,{payment_id:payment.id,razorpay_order_id:payment.order_id,status:payment.status,amount_rupees:payment.amount/100,currency:payment.currency,session_found:!!intent,amount_matches:!!intent&&Number(intent.amount_paise)===Number(payment.amount),finalized_order_id:intent?.finalized_order_id||null});
