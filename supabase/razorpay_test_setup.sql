@@ -11,7 +11,6 @@ create table if not exists public.razorpay_payment_intents (
 );
 alter table public.razorpay_payment_intents enable row level security;
 -- No public policies: only the service role can access intents.
-create unique index if not exists idx_orders_razorpay_payment_id on public.orders (tracking_url) where false;
 create or replace function public.finalize_razorpay_payment(p_razorpay_order_id text,p_razorpay_payment_id text)
 returns uuid language plpgsql security definer set search_path=public as $$
 declare v_intent public.razorpay_payment_intents%rowtype;v_id uuid;v_number text;
@@ -30,3 +29,14 @@ begin
 end;$$;
 revoke all on function public.finalize_razorpay_payment(text,text) from public,anon,authenticated;
 grant execute on function public.finalize_razorpay_payment(text,text) to service_role;
+
+-- Paid orders require a refund workflow; block cancellation until refunds are implemented.
+create or replace function public.prevent_paid_order_cancellation() returns trigger language plpgsql set search_path=public as $$
+begin
+ if old.payment_status='paid' and (new.status='cancelled' or new.subtotal<old.subtotal) then
+  raise exception 'Online paid orders require a refund process; contact support';
+ end if;
+ return new;
+end;$$;
+drop trigger if exists trg_prevent_paid_order_cancellation on public.orders;
+create trigger trg_prevent_paid_order_cancellation before update on public.orders for each row execute function public.prevent_paid_order_cancellation();
