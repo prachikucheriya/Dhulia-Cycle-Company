@@ -10,9 +10,12 @@ exports.handler=async event=>{
   if(authError||!userResult?.user)return reply(401,{error:'Invalid session'});
   const {data:profile,error:profileError}=await db.from('profiles').select('role').eq('id',userResult.user.id).single();
   if(profileError||profile?.role!=='admin')return reply(403,{error:'Admin access required'});
-  const {payment_id,order_id}=JSON.parse(event.body||'{}');
+  const body=JSON.parse(event.body||'{}');
+  const clean=v=>typeof v==='string'?v.trim().replace(/^[`'\"\s]+|[`'\"\s]+$/g,''):'';
+  const payment_id=clean(body.payment_id),order_id=clean(body.order_id);
   const byOrder=!!order_id;
-  if(byOrder?!/^order_[a-zA-Z0-9]{8,40}$/.test(order_id):!/^pay_[a-zA-Z0-9]{8,40}$/.test(payment_id||''))return reply(400,{error:'Invalid Razorpay ID'});
+  const id=byOrder?order_id:payment_id;
+  if(!/^(?:order|pay)_[a-zA-Z0-9]{8,40}$/.test(id)||!id.startsWith(byOrder?'order_':'pay_'))return reply(400,{error:'Invalid Razorpay ID',expected:byOrder?'order_...':'pay_...',received_length:id.length,received_prefix:id.slice(0,6),hint:'Paste only the complete ID, without spaces or labels'});
   const key=process.env.RAZORPAY_KEY_ID,secret=process.env.RAZORPAY_KEY_SECRET;
   if(!key?.startsWith('rzp_test_')||!secret)return reply(503,{error:'Test Razorpay keys not configured'});
   const auth='Basic '+Buffer.from(key+':'+secret).toString('base64');
