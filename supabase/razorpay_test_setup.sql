@@ -19,7 +19,7 @@ begin
  if not found then raise exception 'Payment intent not found';end if;
  if v_intent.finalized_order_id is not null then return v_intent.finalized_order_id;end if;
  if now()-v_intent.created_at>interval '2 days' then raise exception 'Payment intent expired; contact support';end if;
- v_number:='DCC-'+upper(substr(replace(gen_random_uuid()::text,'-',''),1,12));
+ v_number:='DCC-'||upper(substr(replace(gen_random_uuid()::text,'-',''),1,12));
  v_id:=public.place_cod_order(v_number,v_intent.customer_id,v_intent.customer_name,v_intent.email,v_intent.phone,v_intent.address,v_intent.notes,v_intent.lines,v_intent.shipping);
  update public.orders set payment_method='RAZORPAY',payment_status='paid',
  notes=concat_ws(E'\n',nullif(notes,''),'Razorpay Payment ID: '||p_razorpay_payment_id,'Razorpay Order ID: '||p_razorpay_order_id)
