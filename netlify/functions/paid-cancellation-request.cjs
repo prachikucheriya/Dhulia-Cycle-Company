@@ -7,7 +7,7 @@ exports.handler=async e=>{
  if(!token)return reply(401,{error:'Sign in required'});
  const db=adminClient(),{data:auth,error:authError}=await db.auth.getUser(token);
  if(authError||!auth?.user)return reply(401,{error:'Invalid session'});
- if(e.httpMethod==='GET'){const {data,error}=await db.from('paid_cancellation_requests').select('id,order_id,item_id,quantity,status').eq('customer_id',auth.user.id).order('created_at',{ascending:false});if(error)return reply(500,{error:'Could not load cancellation requests'});return reply(200,{ok:true,requests:data||[]});}
+ if(e.httpMethod==='GET'){const {data,error}=await db.from('paid_cancellation_requests').select('id,order_id,item_id,quantity,status,refund_amount_paise,razorpay_refund_id,refund_completed_at,stock_restored_at').eq('customer_id',auth.user.id).order('created_at',{ascending:false});if(error)return reply(500,{error:'Could not load cancellation requests'});return reply(200,{ok:true,requests:data||[]});}
  const {order_id,item_id,quantity}=JSON.parse(e.body||'{}');
  if(!/^[0-9a-f-]{36}$/i.test(order_id||'')||!/^[0-9a-f-]{36}$/i.test(item_id||'')||!Number.isInteger(quantity)||quantity<1)return reply(400,{error:'Invalid cancellation request'});
  const {data:order}=await db.from('orders').select('id,status,payment_status,customer_id').eq('id',order_id).eq('customer_id',auth.user.id).maybeSingle();
