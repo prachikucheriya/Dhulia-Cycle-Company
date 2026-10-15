@@ -12,7 +12,7 @@ exports.handler=async e=>{
   if(!order_id)return reply(400,{error:'Order ID required'});
   const{data:order,error:orderError}=await db.from('orders').select('id,status,customer_id').eq('id',order_id).eq('customer_id',auth.user.id).maybeSingle();
   if(orderError)return reply(500,{error:'Could not verify order'});
-  if(!order)return reply(404,{error:'Order not found in your account'});
+  if(!order)return reply(403,{error:'This order is not linked to your signed-in account. Cancellation was not submitted. Please contact store support with your order number to verify ownership.'});
   if(order.status==='cancelled')return item_id?reply(409,{error:'Order already cancelled'}):reply(200,{ok:true,status:'cancelled'});
   if(!['placed','confirmed','packed'].includes(order.status))return reply(409,{error:'This order can no longer be cancelled'});
   if(item_id&&(!Number.isInteger(quantity)||quantity<1))return reply(400,{error:'Select a valid quantity'});
