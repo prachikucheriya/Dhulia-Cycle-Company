@@ -10,7 +10,7 @@ exports.handler=async event=>{
  const {data:profile}=await db.from('profiles').select('role').eq('id',auth.user.id).maybeSingle();
  if(profile?.role!=='admin')return reply(403,{error:'Admin access required'});
  if(event.httpMethod==='GET'){
- const {data,error}=await db.from('paid_cancellation_requests').select('id,order_id,item_id,customer_id,quantity,status,razorpay_refund_id,refund_amount_paise,created_at').order('created_at',{ascending:false}).limit(200);
+ const {data,error}=await db.from('paid_cancellation_requests').select('id,order_id,item_id,customer_id,quantity,status,razorpay_refund_id,refund_amount_paise,stock_restored_at,created_at').order('created_at',{ascending:false}).limit(200);
  if(error)return reply(500,{error:'Could not load cancellation requests'});
  const orderIds=[...new Set((data||[]).map(x=>x.order_id))],itemIds=[...new Set((data||[]).map(x=>x.item_id))];
  const [{data:orders},{data:items}]=await Promise.all([orderIds.length?db.from('orders').select('id,order_number,customer_name,email,payment_status,status').in('id',orderIds):{data:[]},itemIds.length?db.from('order_items').select('id,name,price,quantity,cancelled_quantity').in('id',itemIds):{data:[]}]);
